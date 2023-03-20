@@ -75,15 +75,22 @@ iam:
 #    - include-me-dir/**
 
 functions:
-  hello:
-    handler: src/handlers.hello
+  CreateProduct: #function name
+    handler: src/handlers.createProduct #pointer
+      events:
+        - httpApi:
+            path: /product #call on this enpoint
+            method: post
+  GetProduct: #function name
+    handler: src/handlers.getProduct #pointer
+      events:
+        - httpApi:
+            path: /product/{id} #call on this enpoint
+            method: get
+      
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
-#    events:
-#      - httpApi:
-#          path: /users/create
-#          method: get
 #      - websocket: $connect
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)
